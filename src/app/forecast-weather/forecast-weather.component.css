@@ -1,0 +1,44 @@
+.forecastWeather_M{
+  height: 410px;
+  background-color: RGBA(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 0 12px 12px 0;
+}
+
+
+  /* 5 days forecast data */
+  .weatherTable_M{
+    width: 280px;
+    height: 60px;
+  }
+    .weatherTable_M td{
+      width: 56px;  
+      text-align: center;
+      font-size: 16px;
+    }
+    .weatherTable_M img{
+      width: 30px;
+    }
+
+
+  /* unit switcher */  
+  .swithBox_M{
+    margin: 20px 0;
+  }
+
+
+  /* search location */
+  .searchLocationBox_M a{
+    display: block;
+    font-size: 12px;
+    color: #fff;
+    margin: 6px 0;
+  }
+
+  .searchLocationBox_M input{
+    height: 30px;
+    width: 250px;
+    color: #000;
+    font-size: 12px;
+    padding-left: 6px;
+  }

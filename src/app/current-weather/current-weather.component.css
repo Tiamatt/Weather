@@ -1,0 +1,47 @@
+.currentWeather_M{
+  height: 380px;
+  padding: 10px 20px;
+  border-radius: 12px 0 0 12px;
+}
+
+/* -- currentDate and address --*/
+.box_M{
+  height: 30px;
+  margin: 10px 0;
+  line-height: 30px;  
+}
+  .box_M i{
+    font-size: 24px;    
+  }
+  .box_M span{
+    font-size: 18px;
+  }
+/* ----------------------------*/
+
+/* --------- temp -------------*/
+.tempBox_M{
+  margin: 40px 0;
+}
+  .tempBox_M span{
+    font-size: 100px;
+    line-height: 100px;
+    padding-left: 10px;
+  }
+  .tempBox_M img{
+    width: 80px;
+  }
+  .tempBox_M i{
+    font-size: 40px;
+    vertical-align: top;
+  }
+/* -----------------------------*/
+
+.weatherTable_M{
+  width: 280px;
+  height: 80px;
+}
+.weatherTable_M td{
+  width: 56px;  
+  text-align: center;
+  font-size: 16px;
+}

@@ -1,0 +1,13 @@
+.wrapper_M{
+  width: 640px;
+  border-radius: 12px;
+  background-color: RGBA(0, 0, 0, 0.5);
+  margin: 10% auto;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper_M{
+    width: 320px;
+    margin: 1px auto;
+  }  
+}

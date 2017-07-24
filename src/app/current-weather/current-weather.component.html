@@ -1,0 +1,41 @@
+<div class="col-sm-6 currentWeather_M"> 
+        
+        <!-- today date and time -->
+        <div class="box_M">
+          <i class="material-icons">date_range</i>
+          <span>{{dateTimeNow | date:'fullDate'}} {{dateTimeNow | date:'mediumTime' }}</span>
+        </div>
+
+        <!-- geolocation - city and country -->
+        <div class="box_M">
+          <i class="material-icons">place</i>
+          <span>{{geolocation.city + ', ' + geolocation.country}}</span>    
+        </div>
+        
+        <!-- avarage temperature (big font) -->
+        <div class="tempBox_M">
+          <img [src]="todayWeatherData.icon[0]" />
+          <span>{{todayWeatherData.value[0]}}</span>
+          <i [class]="selectedUnitType.weatherIcon"></i>
+        </div>
+
+        <!-- three rows of weather details (maxTemp, humidity, etc.) -->
+        <table class="weatherTable_M">
+          <tr>
+            <td *ngFor="let item of todayWeatherData.icon; let i=index">
+              <i [class]="item" [title]="todayWeatherData.title[i]"></i>
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let item of todayWeatherData.value; let i=index">
+              <span>{{item}}</span>
+            </td>
+          </tr>
+           <tr>
+             <td *ngFor="let item of todayWeatherData.unit; let i=index">
+              <span>{{item}}</span>
+            </td>
+          </tr> 
+        </table>  
+        
+    </div>

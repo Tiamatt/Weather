@@ -1,3 +1,27 @@
+---------------- BEGIN: TIAMAT ----------------
+bootstrap @3.3.7
+weather-icons@1.3.2  -- old!!
+Here is a list of weather images: https://openweathermap.org/weather-conditions
+font-awesome@4.7.0
+
+Must do:
+1. Change footer text. Add link to my portfolio
+2. Note!!! Two weather icons are not working:
+    - humidity
+    - pressure
+
+ 3. Weather info service - clean up!!!   
+---------------- END: TIAMAT ----------------
+
+
+
+
+
+
+
+
+
+
 # Weather
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.2.

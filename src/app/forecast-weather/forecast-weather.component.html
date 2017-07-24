@@ -1,0 +1,39 @@
+<div class="col-sm-6 forecastWeather_M">
+      
+      <div>       
+        <p>Five days forecast</p>
+        <hr>
+        <table class="weatherTable_M">
+          <tr>
+            <td *ngFor="let w of forecastWeatherData.weekday">
+              <span>{{w}}</span>
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let i of forecastWeatherData.icon">
+              <img [src]="i" alt="icon"/>
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let t of forecastWeatherData.temp">
+              <span>{{t}}</span>
+            </td>
+          </tr>  
+        </table>        
+      </div>  
+      
+      <div class="swithBox_M">       
+        <p>Units switch</p>
+        <hr>
+        <app-switcher></app-switcher>      
+      </div>   
+        
+      <div class="searchLocationBox_M">
+        <p>Search another location</p>
+        <hr>
+        <input type="text" size="20" placeholder="Enter a location">
+        <i id="search_M" class="fa fa-search"></i>
+        <a href="http://www.wikihow.com/Enable-Location-Services-on-Google-Chrome" target="_blank">I can't see my location. Any advice?</a>
+      </div>  
+      
+   </div>  
