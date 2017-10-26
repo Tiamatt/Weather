@@ -64,7 +64,7 @@ export class WeatherApiService{
         title:['Average temperature','Highest temperature','Lowest temperature','Humidity','Wind speed','Pressure'],
         value:[10, 11, 9, 74, 1.51, 990], // default value, will be updated
         unit:this.unitType.metric.today,   // default value, will be updated
-        icon:['http://openweathermap.org/img/w/02d.png','wi wi-thermometer','wi wi-thermometer-exterior','wi wi-humidity','wi wi-strong-wind','wi wi-barometer']
+        icon:['http://openweathermap.org/img/w/02d.png','../../assets/icon-max-temp.png','../../assets/icon-min-temp.png','../../assets/icon-humidity.png','../../assets/icon-wind.png','../../assets/icon-pressure.png']
         // kali! icon[0] should be grabed from weather api
     };
 
@@ -72,7 +72,7 @@ export class WeatherApiService{
     forecastWeatherData = {
         weekday: this.getWeekdayArr(),
         icon: ['http://openweathermap.org/img/w/02d.png','http://openweathermap.org/img/w/01d.png', 'http://openweathermap.org/img/w/03d.png', 'http://openweathermap.org/img/w/04d.png', 'http://openweathermap.org/img/w/02d.png'],
-        temp: [999, 8, 9, 10, 11]
+        temp: [999, 8, 9, 10, 11] // kali
     };
 
     // END: DEFINE AND ASSIGN FIELDS -----------------------------------------------------------
@@ -125,7 +125,10 @@ export class WeatherApiService{
         let apiUrl = 'http://ipinfo.io';
         return this.http.get(apiUrl)
         .map((response: Response) => { 
-            this.geolocation = response.json();
+            console.log('callGeolocationApi');
+            console.log(response.json());
+            if(this.geolocation  === undefined)
+                this.geolocation = response.json();
             this.listenToGeolocation.next(this.geolocation);
             this.getWeatherApi(this.selectedUnitType.unit);
             return 'GeolocationApi succeeded';

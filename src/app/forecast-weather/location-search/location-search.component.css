@@ -1,0 +1,11 @@
+input{
+    height: 30px;
+    width: 250px;
+    color: #000;
+    font-size: 12px;
+    padding-left: 6px;
+  }
+i:hover{
+    color: #709CEE;
+    cursor: pointer;
+}

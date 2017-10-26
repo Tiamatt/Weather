@@ -16,14 +16,14 @@
         <div class="tempBox_M">
           <img [src]="todayWeatherData.icon[0]" />
           <span>{{todayWeatherData.value[0]}}</span>
-          <i [class]="selectedUnitType.weatherIcon"></i>
+          <i [class]="selectedUnitType.weatherIcon" alt="i"></i>
         </div>
 
         <!-- three rows of weather details (maxTemp, humidity, etc.) -->
         <table class="weatherTable_M">
           <tr>
             <td *ngFor="let item of todayWeatherData.icon; let i=index">
-              <i [class]="item" [title]="todayWeatherData.title[i]"></i>
+              <img [src]="item" [title]="todayWeatherData.title[i]"/>
             </td>
           </tr>
           <tr>

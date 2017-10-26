@@ -7,14 +7,19 @@ body{
   background-attachment: fixed;
   background-position: center;
   
-  color: #fff;
   font-family: 'Oswald', sans-serif;
   font-size: 20px;
 }
 p, hr{
   padding:6px;
   margin:0;
+  color: #fff;
 }
 i, span{
   vertical-align: middle;
+}
+/* style for input of ng4-geoautocomplete can be changes from here only */
+#search_places{
+  height: 40px;
+  border-radius: 5px;
 }

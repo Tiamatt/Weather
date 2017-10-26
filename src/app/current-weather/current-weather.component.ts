@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { WeatherApiService } from '../shared/weather-api.service';
-import { WeatherInfoService } from '../shared/weather-info.service';
 
 @Component({
   selector: 'app-current-weather',
@@ -16,10 +15,7 @@ export class CurrentWeatherComponent implements OnInit {
   forecastWeatherData: any;
   selectedUnitType: any;
 
-  constructor(
-    private weatherApiService: WeatherApiService,
-    private weatherInfoService: WeatherInfoService 
-  ) { }
+  constructor(private weatherApiService: WeatherApiService) { }
 
   ngOnInit() {
     // call today date

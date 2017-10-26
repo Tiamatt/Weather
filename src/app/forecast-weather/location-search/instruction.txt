@@ -1,0 +1,30 @@
+Maybe try this:
+https://www.npmjs.com/package/ng2-location-autocomplete
+
+
+
+Step 1 ------------------------------------------------------
+Install package
+npm i --save ng2-google-place-autocomplete
+package name: ng2-google-place-autocomplete
+package link: https://www.npmjs.com/package/ng2-google-place-autocomplete
+
+
+Step 2 ------------------------------------------------------
+Add package to app.module.ts:
+import { GooglePlaceModule } from 'ng2-google-place-autocomplete';
+imports: [ GooglePlaceModule ]
+
+
+Step 3 ------------------------------------------------------
+Add google map API to index.html
+<script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEyBvMDqCdQ7DCWf9w4p6b67X72hYj2HU&libraries=places"></script>
+In case of issues:
+key 1: AIzaSyDO2WckhnZqbpNjph1MRo86FbhCPJMKy9M
+key 2: AIzaSyAEyBvMDqCdQ7DCWf9w4p6b67X72hYj2HU
+
+
+Step 4 ------------------------------------------------------
+
+
+
