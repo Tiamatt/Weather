@@ -13,9 +13,9 @@ export class SwitcherComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSwitchUnit(_unit:string){
-    this.selectedUnit = _unit;
-    this.weatherApiService.getWeatherApi(_unit);
-  }
+  // onSwitchUnit(_unit:string){
+  //   this.selectedUnit = _unit;
+  //   this.weatherApiService.getWeatherApi(_unit);
+  // }
 
 }

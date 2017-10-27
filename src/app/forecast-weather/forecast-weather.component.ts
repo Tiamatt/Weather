@@ -7,19 +7,19 @@ import { WeatherApiService } from '../shared/weather-api.service';
   styleUrls: ['./forecast-weather.component.css']
 })
 export class ForecastWeatherComponent implements OnInit {
-  forecastWeatherData: any;
+  // forecastWeatherData: any;
 
-  constructor(private weatherApiService: WeatherApiService) { }
+  // constructor(private weatherApiService: WeatherApiService) { }
 
   ngOnInit() {
-    this.forecastWeatherData = this.weatherApiService.forecastWeatherData;
-    this.onListenToForecastWeatherData();
+  //   this.forecastWeatherData = this.weatherApiService.forecastWeatherData;
+  //   this.onListenToForecastWeatherData();
   }
 
-  onListenToForecastWeatherData(){
-    this.weatherApiService.listenToForecastWeatherData.subscribe(
-      (_response) => this.forecastWeatherData = _response
-    );
-  }
+  // onListenToForecastWeatherData(){
+  //   this.weatherApiService.listenToForecastWeatherData.subscribe(
+  //     (_response) => this.forecastWeatherData = _response
+  //   );
+  // }
 
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { WeatherApiService } from '../shared/weather-api.service';
+import { MGeolocation } from '../shared/Models/MGeolocation.class';
+import { MTodayWeather } from '../shared/Models/MTodayWeather.class';
+import { MUnitType } from '../shared/Models/MUnitType.class';
+import { UnitTypeEnum } from '../shared/Enums/UnitTypeEnum.enum';
 
 @Component({
   selector: 'app-current-weather',
@@ -9,57 +13,40 @@ import { WeatherApiService } from '../shared/weather-api.service';
 })
 
 export class CurrentWeatherComponent implements OnInit {
-  dateTimeNow: any;
-  geolocation: any;
-  todayWeatherData: any;
-  forecastWeatherData: any;
-  selectedUnitType: any;
-
+  dateTimeNow: Date;
+  geolocation: MGeolocation;
+  todayWeatherData: MTodayWeather;
+  unitType: MUnitType;
+  
   constructor(private weatherApiService: WeatherApiService) { }
 
+  readonly paramName = MTodayWeather.paramName;
+  readonly iconLinks = MTodayWeather.iconLinks;
+
   ngOnInit() {
-    // call today date
-    this.getDateTimeNow();
-    // oF or oC (icon after huge temp number) and unit
-    this.selectedUnitType = this.weatherApiService.selectedUnitType;
-    // get default values
-    this.geolocation = this.weatherApiService.geolocation;
-    // get default values  
-    this.todayWeatherData = this.weatherApiService.todayWeatherData;
-    // call geolocation API (if will call weather API inside) 
-    this.weatherApiService.getGeolocationApi();
-    // listen for updates
-    this.onListenToGeolocation();
-    this.onListenToTodayWeatherData();
-    this.onListenToSelectedUnitType();
+    // call today's date and time with refreshing each 1s
+    this.getDateTimeClocking();
+
+    this.weatherApiService.geolocationListener.subscribe(
+      (_response: MGeolocation) => this.geolocation  = _response
+    );
+
+    this.weatherApiService.todayWeatherListener.subscribe(
+      (_response: MTodayWeather) => this.todayWeatherData  = _response
+    );
+    
+    this.unitType = MUnitType.getData(UnitTypeEnum.metric);
+
+    // kali
+    //this.geolocation = this.weatherApiService.geolocationListener.getValue();
+    //this.todayWeatherData = this.weatherApiService.todayWeatherListener.getValue();
   }
   
   // get date and time, update each second
-  getDateTimeNow(){
+  private getDateTimeClocking():void{
     setInterval(() => {
         this.dateTimeNow =  new Date();
      }, 1000);
   }
-
-  // resfresh this.geolocation when it is updated
-  onListenToGeolocation(){
-    this.weatherApiService.listenToGeolocation.subscribe(
-      (_response) => this.geolocation = _response
-    );
-  }
-
-   // resfresh this.todayWeatherData when it is updated
-  onListenToTodayWeatherData(){
-    this.weatherApiService.listenToTodayWeatherData.subscribe(
-      (_response) => this.todayWeatherData = _response
-    );
-  }
-
-  onListenToSelectedUnitType(){
-    this.weatherApiService.listenToSelectedUnitType.subscribe(
-      (_response) => this.selectedUnitType = _response
-    );
-  }
-
 
 }

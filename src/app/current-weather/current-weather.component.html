@@ -9,31 +9,31 @@
         <!-- geolocation - city and country -->
         <div class="box_M">
           <i class="material-icons">place</i>
-          <span>{{geolocation.city + ', ' + geolocation.country}}</span>    
+          <span>{{geolocation.address}}</span>    
         </div>
         
         <!-- avarage temperature (big font) -->
         <div class="tempBox_M">
-          <img [src]="todayWeatherData.icon[0]" />
-          <span>{{todayWeatherData.value[0]}}</span>
-          <i [class]="selectedUnitType.weatherIcon" alt="i"></i>
+          <img [src]="todayWeatherData.tempIconLink" />
+          <span>{{todayWeatherData.tempValue}}</span>
+          <i [class]="unitType.unitIcon" alt="i"></i>
         </div>
 
         <!-- three rows of weather details (maxTemp, humidity, etc.) -->
         <table class="weatherTable_M">
           <tr>
-            <td *ngFor="let item of todayWeatherData.icon; let i=index">
-              <img [src]="item" [title]="todayWeatherData.title[i]"/>
+            <td *ngFor="let iconLink of iconLinks">
+              <img [src]="iconLink"/>
             </td>
           </tr>
           <tr>
-            <td *ngFor="let item of todayWeatherData.value; let i=index">
-              <span>{{item}}</span>
+            <td *ngFor="let otherParam of todayWeatherData.otherParamValues">
+              <span>{{otherParam}}</span>
             </td>
           </tr>
            <tr>
-             <td *ngFor="let item of todayWeatherData.unit; let i=index">
-              <span>{{item}}</span>
+             <td *ngFor="let utw of unitType.unitsForTodayWeather">
+              <span>{{utw}}</span>
             </td>
           </tr> 
         </table>  
