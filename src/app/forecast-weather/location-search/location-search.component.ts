@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { WeatherApiService } from '../../shared/weather-api.service';
+import { MGeolocation } from '../../shared/Models/MGeolocation.class';
 
 @Component({
   selector: 'app-location-search',
@@ -12,34 +13,22 @@ export class LocationSearchComponent implements OnInit {
 
   ngOnInit() {}
 
-  // autoCompleteCallback1(selectedData:any) {
-  //   console.log('autoCompleteCallback1');
-  //   console.log(selectedData);
+  autoCompleteCallback1(selectedData:any) {
+    let _lat = selectedData.geometry.location.lat;
+    let _lng = selectedData.geometry.location.lng;
+    let _formatted_address = selectedData.formatted_address;
 
-  //   let _lat = selectedData.geometry.location.lat;
-  //   let _lng = selectedData.geometry.location.lng;
-  //   let _formatted_address = selectedData.formatted_address;
-    
-  //   // let _geolocation = {
-  //   //   city: _formatted_address,
-  //   //   country: '',
-  //   //   loc:_lat+','+_lng
-  //   // };
-
-  //   // console.log(_geolocation);
-  //   if(_lat !== undefined && _lng !== undefined && _formatted_address !== undefined)
-  //   {
-  //     let _geolocation = {
-  //       city: _formatted_address,
-  //       country: '',
-  //       loc:_lat+','+_lng
-  //     };
-  //     console.log(_geolocation);
-  //     this.weatherApiService.listenToGeolocation.next(_geolocation);
-  //     this.weatherApiService.getGeolocationApi();
-  //   }
-  //   else
-  //     alert('Upps! Failed to get searched location');
-  // }
+    if(_lat && _lng && _formatted_address)
+    {
+      let _geolocation : MGeolocation = new MGeolocation(
+        _formatted_address,
+        _lat+','+_lng
+      );
+      this.weatherApiService.geolocationListener.next(_geolocation);
+      this.weatherApiService.getWeatherData();
+    }
+    else
+      alert('Upps! Failed to get searched location');
+  }
 
 }

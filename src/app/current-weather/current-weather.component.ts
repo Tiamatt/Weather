@@ -17,11 +17,11 @@ export class CurrentWeatherComponent implements OnInit {
   geolocation: MGeolocation;
   currentWeather: MCurrentWeather;
   unitType: MUnitType;
-  
-  constructor(private weatherApiService: WeatherApiService) { }
-
   readonly paramName = MCurrentWeather.paramName;
   readonly iconLinks = MCurrentWeather.iconLinks;
+
+
+  constructor(private weatherApiService: WeatherApiService) { }
 
   ngOnInit() {
     // call today's date and time with refreshing each 1s

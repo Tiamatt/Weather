@@ -8,6 +8,7 @@ import { MUnitType } from './Models/MUnitType.class';
 import { MGeolocation } from './Models/MGeolocation.class';
 import { MCurrentWeather } from './Models/MCurrentWeather.class';
 import { UnitTypeEnum } from './Enums/UnitTypeEnum.enum';
+import { MForecastWeather } from './Models/MForecastWeather.class';
 
 @Injectable() // need for http
 
@@ -16,7 +17,7 @@ export class WeatherApiService{
     unitListener: BehaviorSubject<UnitTypeEnum>= new BehaviorSubject(UnitTypeEnum.metric);
     geolocationListener: BehaviorSubject<MGeolocation>= new BehaviorSubject(MGeolocation.getDefault());
     currentWeatherListener: BehaviorSubject<MCurrentWeather>= new BehaviorSubject(MCurrentWeather.getDefault());
-    //forecastWeatherListener: BehaviorSubject<IForecastWeather>; // kali
+    forecastWeatherListener: BehaviorSubject<MForecastWeather> = new BehaviorSubject(MForecastWeather.getDefault());
     
     constructor(private http: Http){}
 
@@ -45,23 +46,13 @@ export class WeatherApiService{
         this.callWeatherApi().subscribe(
             (_response: any[]) => {
                 this.updateCurrentWeather(_response);
+                this.updateForecastWeatherData(_response);
             }, 
             (_error) => {
                 console.log(_error);
                 alert('Failed to get data from weather API. Default weather data will be displayed.');
             }
         );
-    }
-
-    getWeekdayArr(){
-        var result = [];
-        var now = new Date();
-        var weekNameArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        var weekNum = now.getDay();
-        for(var i=weekNum + 1; i<weekNum+6; i++ ){            
-            result.push(weekNameArr[i]);
-        }
-        return result;
     }
 
     // BEGIN: PRIVATE METHODS ---------------------------------------------------------------- 
@@ -107,12 +98,24 @@ export class WeatherApiService{
         this.currentWeatherListener.next(new MCurrentWeather(_tempValue, _tempIconLink, _otherParamValues));
     }
 
+    private updateForecastWeatherData(_apiData){
+        let _iconLinks: string[] = [];
+        let _tempValues: number[] = [];
+        for(var i=0; i<5; i++){
+            let _day = Math.round(_apiData.list[i].temp.day);
+            _tempValues.push(_day);
+            let _icon =  "http://openweathermap.org/img/w/" + _apiData.list[i].weather[0].icon + ".png";
+            _iconLinks.push(_icon);
+        }
+        this.forecastWeatherListener.next(new MForecastWeather(_iconLinks, _tempValues));
+    }
+
     private turnLocToUrlPart(){
         var result = this.geolocationListener.getValue().lonAndLat.replace(',', '&lon=');
         result = ('&lat=').concat(result);
         return result; // example: '&lat=23&lon=-120'
     }
-    
+
     // END: PRIVATE METHODS ----------------------------------------------------------------
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherApiService } from '../../shared/weather-api.service';
+import { UnitTypeEnum } from '../../shared/Enums/UnitTypeEnum.enum';
 
 @Component({
   selector: 'app-switcher',
@@ -7,15 +8,20 @@ import { WeatherApiService } from '../../shared/weather-api.service';
   styleUrls: ['./switcher.component.css']
 })
 export class SwitcherComponent implements OnInit {
-  selectedUnit: string = 'metric';
+  selectedUnitStr: string;
+
   constructor(private weatherApiService: WeatherApiService) { }
 
   ngOnInit() {
+    // default value
+    this.selectedUnitStr = UnitTypeEnum[this.weatherApiService.unitListener.getValue()];
   }
 
-  // onSwitchUnit(_unit:string){
-  //   this.selectedUnit = _unit;
-  //   this.weatherApiService.getWeatherApi(_unit);
-  // }
+  onSwitchUnit(_selectedUnitStr:string){
+    this.selectedUnitStr = _selectedUnitStr;
+    let _unit: UnitTypeEnum = (_selectedUnitStr == 'metric')? UnitTypeEnum.metric: UnitTypeEnum.imperial;
+    this.weatherApiService.unitListener.next(_unit)
+    this.weatherApiService.getWeatherData();
+  }
 
 }

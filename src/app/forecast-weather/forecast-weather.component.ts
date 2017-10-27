@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherApiService } from '../shared/weather-api.service';
+import { MForecastWeather } from '../shared/Models/MForecastWeather.class';
 
 @Component({
   selector: 'app-forecast-weather',
@@ -7,19 +8,16 @@ import { WeatherApiService } from '../shared/weather-api.service';
   styleUrls: ['./forecast-weather.component.css']
 })
 export class ForecastWeatherComponent implements OnInit {
-  // forecastWeatherData: any;
+  forecastWeather: MForecastWeather;
+  readonly weekdays: string[] = MForecastWeather.weekdays;
 
-  // constructor(private weatherApiService: WeatherApiService) { }
+  constructor(private weatherApiService: WeatherApiService) { }
 
   ngOnInit() {
-  //   this.forecastWeatherData = this.weatherApiService.forecastWeatherData;
-  //   this.onListenToForecastWeatherData();
-  }
 
-  // onListenToForecastWeatherData(){
-  //   this.weatherApiService.listenToForecastWeatherData.subscribe(
-  //     (_response) => this.forecastWeatherData = _response
-  //   );
-  // }
+    this.weatherApiService.forecastWeatherListener.subscribe(
+      (_response: MForecastWeather) => this.forecastWeather = _response
+    );
+  }
 
 }
