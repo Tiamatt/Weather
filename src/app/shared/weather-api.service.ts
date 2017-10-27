@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 // models
 import { MUnitType } from './Models/MUnitType.class';
 import { MGeolocation } from './Models/MGeolocation.class';
-import { MTodayWeather } from './Models/MTodayWeather.class';
+import { MCurrentWeather } from './Models/MCurrentWeather.class';
 import { UnitTypeEnum } from './Enums/UnitTypeEnum.enum';
 
 @Injectable() // need for http
@@ -15,7 +15,7 @@ export class WeatherApiService{
     // listeners (data holders) with initial values
     unitListener: BehaviorSubject<UnitTypeEnum>= new BehaviorSubject(UnitTypeEnum.metric);
     geolocationListener: BehaviorSubject<MGeolocation>= new BehaviorSubject(MGeolocation.getDefault());
-    todayWeatherListener: BehaviorSubject<MTodayWeather>= new BehaviorSubject(MTodayWeather.getDefault());
+    currentWeatherListener: BehaviorSubject<MCurrentWeather>= new BehaviorSubject(MCurrentWeather.getDefault());
     //forecastWeatherListener: BehaviorSubject<IForecastWeather>; // kali
     
     constructor(private http: Http){}
@@ -44,9 +44,7 @@ export class WeatherApiService{
     getWeatherData(){
         this.callWeatherApi().subscribe(
             (_response: any[]) => {
-                console.log('getWeatherData'); 
-                console.log(_response); 
-                this.updateTodayWeather(_response);
+                this.updateCurrentWeather(_response);
             }, 
             (_error) => {
                 console.log(_error);
@@ -70,7 +68,6 @@ export class WeatherApiService{
     
     private callGeolocationApi(): Observable<any>{
         let apiUrl = 'http://ipinfo.io';
-        console.log(apiUrl);
         return this.http.get(apiUrl).map((response: Response) => response.json())
         .catch(error => {
             console.log(error);
@@ -91,9 +88,8 @@ export class WeatherApiService{
         });        
     }
     
-    private updateTodayWeather(_apiData){
-        
-        let _tempValue = Math.round(_apiData.list[0].temp.day);
+    private updateCurrentWeather(_apiData){
+        let _tempValue = Math.round(_apiData.list[0].temp.day);        
         let _tempIconLink = "http://openweathermap.org/img/w/" + _apiData.list[0].weather[0].icon + ".png";
         
         let _otherParamValues: number[] = []; 
@@ -108,7 +104,7 @@ export class WeatherApiService{
         let _pressure = Math.round(_apiData.list[0].pressure);
         _otherParamValues.push(_pressure);
         
-        this.todayWeatherListener.next(new MTodayWeather(_tempValue, _tempIconLink, _otherParamValues));
+        this.currentWeatherListener.next(new MCurrentWeather(_tempValue, _tempIconLink, _otherParamValues));
     }
 
     private turnLocToUrlPart(){
@@ -116,6 +112,7 @@ export class WeatherApiService{
         result = ('&lat=').concat(result);
         return result; // example: '&lat=23&lon=-120'
     }
+    
     // END: PRIVATE METHODS ----------------------------------------------------------------
 
 }

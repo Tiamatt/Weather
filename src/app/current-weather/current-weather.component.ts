@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { WeatherApiService } from '../shared/weather-api.service';
 import { MGeolocation } from '../shared/Models/MGeolocation.class';
-import { MTodayWeather } from '../shared/Models/MTodayWeather.class';
+import { MCurrentWeather } from '../shared/Models/MCurrentWeather.class';
 import { MUnitType } from '../shared/Models/MUnitType.class';
 import { UnitTypeEnum } from '../shared/Enums/UnitTypeEnum.enum';
 
@@ -15,13 +15,13 @@ import { UnitTypeEnum } from '../shared/Enums/UnitTypeEnum.enum';
 export class CurrentWeatherComponent implements OnInit {
   dateTimeNow: Date;
   geolocation: MGeolocation;
-  todayWeatherData: MTodayWeather;
+  currentWeather: MCurrentWeather;
   unitType: MUnitType;
   
   constructor(private weatherApiService: WeatherApiService) { }
 
-  readonly paramName = MTodayWeather.paramName;
-  readonly iconLinks = MTodayWeather.iconLinks;
+  readonly paramName = MCurrentWeather.paramName;
+  readonly iconLinks = MCurrentWeather.iconLinks;
 
   ngOnInit() {
     // call today's date and time with refreshing each 1s
@@ -31,15 +31,11 @@ export class CurrentWeatherComponent implements OnInit {
       (_response: MGeolocation) => this.geolocation  = _response
     );
 
-    this.weatherApiService.todayWeatherListener.subscribe(
-      (_response: MTodayWeather) => this.todayWeatherData  = _response
+    this.weatherApiService.currentWeatherListener.subscribe(
+      (_response: MCurrentWeather) => this.currentWeather  = _response
     );
     
     this.unitType = MUnitType.getData(UnitTypeEnum.metric);
-
-    // kali
-    //this.geolocation = this.weatherApiService.geolocationListener.getValue();
-    //this.todayWeatherData = this.weatherApiService.todayWeatherListener.getValue();
   }
   
   // get date and time, update each second

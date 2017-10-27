@@ -3,13 +3,13 @@ import { UnitTypeEnum } from "../Enums/UnitTypeEnum.enum";
 export class MUnitType{
     unit: UnitTypeEnum;
     unitIcon: string;
-    unitsForTodayWeather: string[];
+    unitsForCurrentWeather: string[];
 
     readonly 
-    constructor(unit: UnitTypeEnum, unitIcon: string, unitsForTodayWeather: string[]){
+    constructor(unit: UnitTypeEnum, unitIcon: string, unitsForCurrentWeather: string[]){
         this.unit = unit;
         this.unitIcon = unitIcon;
-        this.unitsForTodayWeather = unitsForTodayWeather;
+        this.unitsForCurrentWeather = unitsForCurrentWeather;
     }
     
     static getData(_unit: UnitTypeEnum): MUnitType

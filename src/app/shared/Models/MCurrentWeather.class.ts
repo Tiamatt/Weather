@@ -1,4 +1,4 @@
-export class MTodayWeather{
+export class MCurrentWeather{
     // fields
     tempValue: number;
     tempIconLink : string; // mandatory
@@ -13,8 +13,8 @@ export class MTodayWeather{
         this.otherParamValues = otherParamValues        
     }
 
-    static getDefault():MTodayWeather{
-        return new MTodayWeather(
+    static getDefault():MCurrentWeather{
+        return new MCurrentWeather(
             10, //tempValue, metric
             'http://openweathermap.org/img/w/02d.png', // tempIconLink
             [12, 10, 74, 1.51, 880], // otherParamValue, metric

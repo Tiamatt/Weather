@@ -14,8 +14,8 @@
         
         <!-- avarage temperature (big font) -->
         <div class="tempBox_M">
-          <img [src]="todayWeatherData.tempIconLink" />
-          <span>{{todayWeatherData.tempValue}}</span>
+          <img [src]="currentWeather.tempIconLink" />
+          <span>{{currentWeather.tempValue}}</span>
           <i [class]="unitType.unitIcon" alt="i"></i>
         </div>
 
@@ -27,12 +27,12 @@
             </td>
           </tr>
           <tr>
-            <td *ngFor="let otherParam of todayWeatherData.otherParamValues">
+            <td *ngFor="let otherParam of currentWeather.otherParamValues">
               <span>{{otherParam}}</span>
             </td>
           </tr>
            <tr>
-             <td *ngFor="let utw of unitType.unitsForTodayWeather">
+             <td *ngFor="let utw of unitType.unitsForCurrrentWeather">
               <span>{{utw}}</span>
             </td>
           </tr> 
