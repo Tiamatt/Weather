@@ -1,8 +1,8 @@
 # Weather app
-This [web application](https://tiamatt.github.io/Weather) provides weather forecast for today and next five days for any selected region in metric and imperial units. Built with Angular and google API.
+This [web application](https://tiamatt.github.io/Weather) provides weather forecast for today and next five days for any selected region in metric and imperial units. Built with Angular and Google API.
 
 
-## DEMO
+## Demo
 Live DEMO [here](https://tiamatt.github.io/Weather) </br>
 </br>
 ![WeatherScreenshot](/src/assets/screenshot.png?raw=true "Weather screenshot")

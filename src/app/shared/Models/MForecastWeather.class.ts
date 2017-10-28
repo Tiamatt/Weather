@@ -12,7 +12,7 @@ export class MForecastWeather{
 
     static getDefault(): MForecastWeather{
         return new MForecastWeather(
-            ['http://openweathermap.org/img/w/02d.png','http://openweathermap.org/img/w/01d.png', 'http://openweathermap.org/img/w/03d.png', 'http://openweathermap.org/img/w/04d.png', 'http://openweathermap.org/img/w/02d.png'],
+            ['https://openweathermap.org/img/w/02d.png','https://openweathermap.org/img/w/01d.png', 'https://openweathermap.org/img/w/03d.png', 'https://openweathermap.org/img/w/04d.png', 'https://openweathermap.org/img/w/02d.png'],
             [9, 8, 9, 10, 11]
         );
     }

@@ -58,7 +58,7 @@ export class WeatherApiService{
     // BEGIN: PRIVATE METHODS ---------------------------------------------------------------- 
     
     private callGeolocationApi(): Observable<any>{
-        let apiUrl = 'http://ipinfo.io';
+        let apiUrl = 'https://ipinfo.io';
         return this.http.get(apiUrl).map((response: Response) => response.json())
         .catch(error => {
             console.log(error);
@@ -68,7 +68,7 @@ export class WeatherApiService{
 
     private callWeatherApi(): Observable<any>{
         let _unitStr =  UnitTypeEnum[this.unitListener.getValue()];
-        let _url = 'http://api.openweathermap.org/data/2.5/forecast/daily?appid=87232dad7a32939d0de2bfe4f97d1c92';
+        let _url = 'https://api.openweathermap.org/data/2.5/forecast/daily?appid=87232dad7a32939d0de2bfe4f97d1c92';
         _url = _url.concat(this.turnLocToUrlPart()); // add location param to url (exp: &lat=23&lon=20)
         _url = _url.concat('&units=' + _unitStr); // add unit param to url (exp: &units=metric)
         return this.http.get(_url)
@@ -81,7 +81,7 @@ export class WeatherApiService{
     
     private updateCurrentWeather(_apiData){
         let _tempValue = Math.round(_apiData.list[0].temp.day);        
-        let _tempIconLink = "http://openweathermap.org/img/w/" + _apiData.list[0].weather[0].icon + ".png";
+        let _tempIconLink = "https://openweathermap.org/img/w/" + _apiData.list[0].weather[0].icon + ".png";
         
         let _otherParamValues: number[] = []; 
         let _maxTemp =  Math.round(_apiData.list[0].temp.max);
@@ -104,7 +104,7 @@ export class WeatherApiService{
         for(var i=0; i<5; i++){
             let _day = Math.round(_apiData.list[i].temp.day);
             _tempValues.push(_day);
-            let _icon =  "http://openweathermap.org/img/w/" + _apiData.list[i].weather[0].icon + ".png";
+            let _icon =  "https://openweathermap.org/img/w/" + _apiData.list[i].weather[0].icon + ".png";
             _iconLinks.push(_icon);
         }
         this.forecastWeatherListener.next(new MForecastWeather(_iconLinks, _tempValues));
