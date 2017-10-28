@@ -34,8 +34,10 @@ export class CurrentWeatherComponent implements OnInit {
     this.weatherApiService.currentWeatherListener.subscribe(
       (_response: MCurrentWeather) => this.currentWeather  = _response
     );
-    
-    this.unitType = MUnitType.getData(UnitTypeEnum.metric);
+
+    this.weatherApiService.unitListener.subscribe(
+      (_response: UnitTypeEnum) => this.unitType = MUnitType.getData(_response)
+    );
   }
   
   // get date and time, update each second
